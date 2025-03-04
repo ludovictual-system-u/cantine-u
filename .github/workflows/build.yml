@@ -1,7 +1,8 @@
 name: Menu Cantine
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * 1-5"
 
 jobs:
   executer-script:
