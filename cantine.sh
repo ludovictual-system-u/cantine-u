@@ -2,6 +2,7 @@
 
 EMAIL=$1
 PASSWD=$2
+WEBHOOK_URL="https://chat.googleapis.com/v1/spaces/AAAAEDUwop4/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=IcFzbug6EE1y5CGXAb5mA5gJECzDlctxvHosRnYx8Yc"
 TODAY=$(date +"%Y-%m-%d")
 
 fn_auth () {
@@ -110,9 +111,17 @@ output_json=$(echo $menu_jour | jq -r -c '
 
 }
 
+fn_google_chat () {
+
+# Envoyer la cards via curl au salon Gchat
+curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d "$output_json" $WEBHOOK_URL
+
+}
+
 
 fn_auth
 fn_get_menu
 fn_google_cards
+fn_google_chat
 
-echo $output_json
+# echo $output_json | jq .
