@@ -2,7 +2,7 @@
 
 EMAIL=$1
 PASSWD=$2
-WEBHOOK_URL="https://chat.googleapis.com/v1/spaces/AAAAEDUwop4/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=IcFzbug6EE1y5CGXAb5mA5gJECzDlctxvHosRnYx8Yc"
+WEBHOOK_URL=$3
 TODAY=$(date +"%Y-%m-%d")
 
 fn_auth () {
