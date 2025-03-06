@@ -114,7 +114,7 @@ output_json=$(echo $menu_jour | jq -r -c '
 fn_google_chat () {
 
 # Envoyer la cards via curl au salon Gchat
-curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d "$output_json" $WEBHOOK_URL
+curl -X POST -H "Content-Type: application/json; charset=UTF-8" -d "$output_json" "$WEBHOOK_URL"
 
 }
 
