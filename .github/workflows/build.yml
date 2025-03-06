@@ -16,4 +16,4 @@ jobs:
     - name: Exécution du script Cantine
       run: |
         echo "Exécution du script Bash"
-        ./cantine.sh '${{ secrets.EMAIL }}' '${{ secrets.PASSWORD }} '${{ secrets.WEBHOOK }}'
+        ./cantine.sh '${{ secrets.EMAIL }}' '${{ secrets.PASSWORD }}' '${{ secrets.WEBHOOK }}'
