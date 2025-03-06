@@ -2,7 +2,7 @@ tname: Menu Cantine
 
 on:
   schedule:
-    - cron: "0 8 * * 1-5"
+    - cron: "50 7 * * 1-5"
 
 jobs:
   executer-script:
