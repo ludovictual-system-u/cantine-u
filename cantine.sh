@@ -55,7 +55,7 @@ output_json=$(echo $menu_jour | jq -r -c '
     cards: [
       {
         header: {
-          title: "Menu du Jour",
+          title: " 🍽️ Menu du Jour",
           subtitle: (.[0].date | split("T")[0]),
         },
         sections: [
@@ -63,7 +63,7 @@ output_json=$(echo $menu_jour | jq -r -c '
             widgets: [
               {
                 textParagraph: {
-                  text: "<b>Entrées :</b>"
+                  text: "<b>🥗 Entrées :</b>"
                 }
               },
               {
@@ -73,7 +73,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: "<b>Plats :</b>"
+                  text: "<b>🍲 Plats :</b>"
                 }
               },
               {
@@ -83,7 +83,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: "<b>Garnitures :</b>"
+                  text: "<b>🍛 Garnitures :</b>"
                 }
               },
               {
@@ -93,7 +93,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: "<b>Desserts :</b>"
+                  text: "<b>🍰 Desserts :</b>"
                 }
               },
               {
