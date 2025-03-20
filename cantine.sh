@@ -43,7 +43,8 @@ EOF
  -H 'locale: fr_FR' \
  -H 'ocp-apim-subscription-key: 7d777a5c9c7a4def8f8e756688a0326a' \
  -H 'univers_code: CONSOMMATEUR' \
- | jq '[.[] | {date, menus: [.menus[].categories[] | select(.code == "ENTREE" or .code == "PLAT" or .code == "GARNITURE" or .code == "DESSERT") | {category: .label, labels: [.products[].commercial_label]}]}]')
+ -H 'verbose: true' \
+ | jq '[.[] | {date, menus: [.menus[].categories[] | select(.code == "ENTREE" or .code == "PLAT" or .code == "GARNITURE" or .code == "DESSERT") | {category: .label, labels: [.products[] | {commercial_label, price_incl_vat}]}]}]')
 } 
 
 
@@ -68,7 +69,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[0].labels | join("\n ")) 
+                  text: (.[0].menus[0].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n ")) 
                 }
               },
               {
@@ -78,7 +79,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[1].labels | join("\n "))
+                  text: (.[0].menus[1].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))   
                 }
               },
               {
@@ -88,7 +89,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[2].labels | join("\n "))
+                  text: (.[0].menus[2].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
                 }
               },
               {
@@ -98,7 +99,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[3].labels | join("\n "))
+                  text: (.[0].menus[3].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
                 }
               }
             ]
