@@ -69,7 +69,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[0].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n ")) 
+                  text: (.[0].menus[1].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n ")) 
                 }
               },
               {
@@ -79,7 +79,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[1].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))   
+                  text: (.[0].menus[2].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))   
                 }
               },
               {
@@ -89,7 +89,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[2].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
+                  text: (.[0].menus[3].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
                 }
               },
               {
@@ -99,7 +99,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[3].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
+                  text: (.[0].menus[4].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
                 }
               }
             ]
