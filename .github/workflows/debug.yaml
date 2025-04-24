@@ -1,0 +1,17 @@
+name: Debug Cantine
+
+on:
+  workflow_dispatch:
+
+jobs:
+  executer-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get cantine menu
+      uses: actions/checkout@v4
+
+    - name: Exécution du script Cantine
+      run: |
+        echo "Exécution du script Bash"
+        ./cantine.sh '${{ secrets.EMAIL }}' '${{ secrets.PASSWORD }}' '${{ secrets.WEBHOOK_TEST }}'
