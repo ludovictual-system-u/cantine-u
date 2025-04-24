@@ -94,7 +94,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: "<b>🍏 Salad Bar :</b>"
+                  text: "<b>🍏 Desserts Bar :</b>"
                 }
               },
               {
