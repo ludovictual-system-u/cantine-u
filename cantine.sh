@@ -31,14 +31,17 @@ fn_get_menu () {
  -H 'ocp-apim-subscription-key: 7d777a5c9c7a4def8f8e756688a0326a' \
  -H 'univers_code: CONSOMMATEUR' \
  -H 'verbose: true' \
- | jq '[.[] | {date, menus: [.menus[].categories[] | select(.code == "ENTREE" or .code == "PLAT" or .code == "GARNITURE" or .code == "DESSERT"  or .code == "DESSERT_BAR") | {category: .label, labels: [.products[] | {commercial_label, price_incl_vat}]}]}]'
+ | jq '[.[] | {date, menus: [.menus[].categories[] | select(.code == "ENTREE" or .code == "PLAT" or .code == "GARNITURE" or .code == "DESSERT"  or .code == "DESSERT_BAR") | {category: .code, labels: [.products[] | {commercial_label, price_incl_vat}]}]}]'
  )
 
-#echo $menu_jour | jq .
+# Arrondi les prix à x2 chiffres après la virgule.
+menu_jour=$(echo $menu_jour | jq '.[0].menus[].labels[] |= (.price_incl_vat |= (. * 100 | round / 100))')
+
+# echo $menu_jour | jq .
 
 } 
 
-fn_google_cards () {
+fn_google_card () {
 
 # Transformation en card Google Chat avec un template
 output_json=$(echo $menu_jour | jq -r -c '
@@ -59,7 +62,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[0].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n ")) 
+                  text: (.[0].menus[] | select(.category == "ENTREE") | .labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
                 }
               },
               {
@@ -69,7 +72,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[1].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))   
+                  text: (.[0].menus[] | select(.category == "PLAT") | .labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))   
                 }
               },
               {
@@ -79,7 +82,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[2].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
+                  text: (.[0].menus[] | select(.category == "GARNITURE") | .labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
                 }
               },
               {
@@ -89,7 +92,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[3].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
+                  text: (.[0].menus[] | select(.category == "DESSERT") | .labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
                 }
               },
               {
@@ -99,7 +102,7 @@ output_json=$(echo $menu_jour | jq -r -c '
               },
               {
                 textParagraph: {
-                  text: (.[0].menus[4].labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
+                  text: (.[0].menus[] | select(.category == "DESSERT_BAR") | .labels | map("\(.commercial_label) : \(.price_incl_vat) €") | join("\n "))
                 }
               }
             ]
@@ -125,5 +128,5 @@ curl -X POST -H 'Content-Type: application/json' -d "$output_json" "$WEBHOOK_URL
 
 fn_auth
 fn_get_menu
-fn_google_cards
+fn_google_card
 fn_google_chat

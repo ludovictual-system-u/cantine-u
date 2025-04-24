@@ -1,4 +1,4 @@
-name: Debug Cantine
+name: Debug
 
 on:
   workflow_dispatch:
