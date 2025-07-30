@@ -111,6 +111,37 @@ output_json=$(echo "$menu_jour" | jq -r -c --arg factory_iaas_url "https://u-iri
           {
             "widgets": [
               {
+                "buttonList": {
+                  "buttons": [
+                    {
+                      "text": "Recharger",
+                      "icon": {
+                        "knownIcon": "SHOPPING_CART"
+                      },
+                      "onClick": {
+                        "openLink": {
+                          "url": "https://app.toqla.fr/wallet"
+                        }
+                      }
+                    },
+                    {
+                      "text": "Commander",
+                      "icon": {
+                        "knownIcon": "BOOKMARK"
+                      },
+                      "onClick": {
+                        "openLink": {
+                          "url": "https://app.toqla.fr/site/67/shop/a7c83e5b-080a-4b55-b3aa-517b2eb117ce"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "divider": {}
+              },
+              {
                 "decoratedText": {
                   "icon": {
                     "knownIcon": "RESTAURANT_ICON"
