@@ -125,7 +125,7 @@ output_json=$(echo "$menu_jour" | jq -r -c --arg factory_iaas_url "https://u-iri
                       }
                     },
                     {
-                      "text": "Commander",
+                      "text": "C&C",
                       "icon": {
                         "knownIcon": "BOOKMARK"
                       },
